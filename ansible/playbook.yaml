@@ -1,0 +1,15 @@
+- name: Configurar la VM y desplegar la aplicación con Docker
+  hosts: vm
+  become: yes
+  tasks:
+    - name: Actualizar lista de paquetes
+      apt:
+        update_cache: yes
+
+    - name: Instalar Docker
+      apt:
+        name: docker-ce
+        state: present
+
+    - name: Ejecutar contenedor web con Nginx
+      command: docker run -d -p 80:80 nginx
